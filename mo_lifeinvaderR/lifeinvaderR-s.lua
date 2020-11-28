@@ -2,6 +2,24 @@ ESX = nil
 local currentRobbery = false
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
+ESX.RegisterServerCallback("lifeinvaderRobbery:getOnlinePoliceCount",function(source,cb)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	local Players = ESX.GetPlayers()
+	local policeOnline = 0
+	for i = 1, #Players do
+		local xPlayer = ESX.GetPlayerFromId(Players[i])
+		if xPlayer["job"]["name"] == "police" then
+			policeOnline = policeOnline + 1
+		end
+	end
+	if policeOnline >= Config.RequiredPolice then
+		cb(true)
+	else
+		cb(false)
+		TriggerClientEvent('esx:showNotification', source, _U('not_enough_police'))
+	end
+end)
+
 ESX.RegisterServerCallback('lifeinvaderRobbery:removeEmptyUSB', function(source, cb)
 	_source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)

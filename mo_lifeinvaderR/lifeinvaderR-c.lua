@@ -80,14 +80,21 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(1)
-		if IsControlJustReleased(1, Config.trigger_key) and not currentRobbery then
-			local usbDistance = GetDistanceBetweenCoords(Config.RobberyUSBStick.Coords.x, Config.RobberyUSBStick.Coords.y, Config.RobberyUSBStick.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true)
-			if usbDistance < 1 then
-				ESX.TriggerServerCallback('lifeinvaderRobbery:removeEmptyUSB', function(hasRemoved)
-					if not hasRemoved then
-						TriggerServerEvent('lifeinvaderRobbery:currentRobbery', false)
-					else
-						startRobbery()
+		local usbDistance = GetDistanceBetweenCoords(Config.RobberyUSBStick.Coords.x, Config.RobberyUSBStick.Coords.y, Config.RobberyUSBStick.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true)
+		if usbDistance < 1 and not currentRobbery then
+			if IsControlJustReleased(0, Config.trigger_key) then
+				ESX.TriggerServerCallback('lifeinvaderRobbery:getOnlinePoliceCount', function(enoughCops)
+					if enoughCops then
+						local usbDistance = GetDistanceBetweenCoords(Config.RobberyUSBStick.Coords.x, Config.RobberyUSBStick.Coords.y, Config.RobberyUSBStick.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true)
+						if usbDistance < 1 then
+							ESX.TriggerServerCallback('lifeinvaderRobbery:removeEmptyUSB', function(hasRemoved)
+								if not hasRemoved then
+									TriggerServerEvent('lifeinvaderRobbery:currentRobbery', false)
+								else
+									startRobbery()
+								end
+							end)
+						end
 					end
 				end)
 			end
@@ -111,7 +118,9 @@ function startRobbery()
 	FreezeEntityPosition(playerPed, true)
 	SetEntityHeading(playerPed, Config.RobberyUSBStick.Heading)
 	SetCurrentPedWeapon(playerPed, GetHashKey('weapon_unarmed'), true)
-	TaskPlayAnim(playerPed, "amb@prop_human_atm@female@enter", "enter", 2.0, 2.0, 4333, 1, 1.0, true, true, true)
+	ESX.Streaming.RequestAnimDict("amb@prop_human_atm@female@enter", function()
+		TaskPlayAnim(playerPed, "amb@prop_human_atm@female@enter", "enter", 2.0, 2.0, 4333, 1, 1.0, true, true, true)
+	end)
 	Citizen.Wait(4333)
 	FreezeEntityPosition(playerPed, false)
 	notify(_U('usb_switch_robbery'))
@@ -137,7 +146,9 @@ function startRobbery()
 				playerCoords = vector3(GetEntityCoords(GetPlayerPed(PlayerId()), true))
 				SetEntityCoords(playerPed, playerCoords.x, playerCoords.y, playerCoords.z - 1.5)
 				SetCurrentPedWeapon(playerPed, GetHashKey('weapon_unarmed'), true)
-				TaskPlayAnim(playerPed, "amb@prop_human_seat_computer@male@base", "base", 2.0, 2.0, 12166, 1, 1.0, true, true, true)
+				ESX.Streaming.RequestAnimDict("amb@prop_human_seat_computer@male@base", function()
+					TaskPlayAnim(playerPed, "amb@prop_human_seat_computer@male@base", "base", 2.0, 2.0, 12166, 1, 1.0, true, true, true)
+				end)
 				Citizen.Wait(500)
 				DoScreenFadeIn(1000)
 				TriggerServerEvent('lifeinvaderRobbery:callPolice')
@@ -176,7 +187,9 @@ function startRobbery()
 				FreezeEntityPosition(playerPed, true)
 				SetEntityHeading(playerPed, Config.RobberyUSBStick.Heading)
 				SetCurrentPedWeapon(playerPed, GetHashKey('weapon_unarmed'), true)
-				TaskPlayAnim(playerPed, "amb@prop_human_atm@male@enter", "enter", 2.0, 2.0, 4333, 1, 1.0, true, true, true)
+				ESX.Streaming.RequestAnimDict("amb@prop_human_atm@male@enter", function()
+					TaskPlayAnim(playerPed, "amb@prop_human_atm@male@enter", "enter", 2.0, 2.0, 4333, 1, 1.0, true, true, true)
+				end)
 				Citizen.Wait(4333)
 				FreezeEntityPosition(playerPed, false)
 				USBtaken = true
@@ -271,10 +284,10 @@ function Draw3DText(x, y, z, scl_factor, text)
         SetTextEntry("STRING")
         SetTextCentre(1)
         AddTextComponentString(text)
-        --[[Grauen Kasten um den Text]]
-        --local factor = (string.len(text)) / 370
-        --DrawRect(_x,_y+0.0125, 0.015+ factor, 0.038, 003, 003, 003, 75)
-        --[[Grauen Kasten um den Text]]
+        if Config.greySquare == true then
+			local factor = (string.len(text)) / 370
+			DrawRect(_x,_y+0.0125, 0.015+ factor, 0.038, 003, 003, 003, 75)
+        end
         DrawText(_x, _y)
     end
 end

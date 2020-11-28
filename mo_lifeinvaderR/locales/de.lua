@@ -1,6 +1,7 @@
 Locales['de'] = {
 	['empty'] = '(leer)',
 	['data'] = '(mit Daten)',
+	['not_enough_police'] = 'Es sind ~b~nicht genug Polizisten ~s~im ~b~Staat~s~.',
 	['not_enough_empty'] = 'Du hast keinen ~b~leeren USB Stick~s~!',
 	['not_enough_data'] = 'Du hast keinen ~b~USB Stick mit Daten~s~!',
 	['lester_laptop'] = '~b~Daten ~s~hochladen',
