@@ -3,9 +3,9 @@ Config.Locale = 'en'
 
 Config.greySquare = false --default: true
 Config.sellPrice = 55000 --($) default: 55000
-Config.DownloadWaitTime = 3 --(min) default: 3
+Config.DownloadWaitTime = 2 --(min) default: 2
 Config.NextRobberyWaitTime = 30 --(min) default: 30
-Config.UploadWaitTime = 2 --(min) default: 2
+Config.UploadWaitTime = 1.5 --(min) default: 1.5
 Config.trigger_key = 46 --E key
 Config.shutPowerDown = true --default: true
 Config.RequiredPolice = 3 --default: 3
