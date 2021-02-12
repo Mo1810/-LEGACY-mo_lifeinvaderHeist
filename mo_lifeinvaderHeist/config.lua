@@ -1,5 +1,5 @@
 Config = {}
-Config.Locale = 'de'
+Config.Locale = 'en'
 
 Config.greySquare = false --default: false
 Config.sellPrice = 65000 --($) default: 65000
