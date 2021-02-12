@@ -15,6 +15,7 @@ For support please contact: Mo1810#4230 (Discord)
  - When the time is over you will get notified and you can pull the USB Stick out of the computer.
  - You now should have an USB Stick with data. With this Stick you can go to the 'Darnell Bros' building. There is a laptop upstairs where you can sell the data to Lester. (Gives 65000$ by default but can be changed in the config.lua.)
 
+
 [WIE ES FUNKTIONIERT]
  - Als erstes kaufst du einen USB Stick von einem Laden.
  - Dann gehst du zu dem Lifeinvader Gebäude in den Serverraum (ist auf der Minimap markiert) und steckst den USB Stick in den PC.
