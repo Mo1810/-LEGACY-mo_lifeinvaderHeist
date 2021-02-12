@@ -1,6 +1,6 @@
-# mo_lifeinvaderRobbery
+# mo_lifeinvaderHeist
 
-Lifeinvader Robbery Script for FiveM [lua]
+Lifeinvader Heist Script for FiveM [lua]
 
 For support please contact: Mo1810#4230 (Discord)
 
