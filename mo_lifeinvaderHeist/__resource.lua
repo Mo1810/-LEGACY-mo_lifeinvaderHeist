@@ -18,6 +18,5 @@ client_scripts {
 }
 
 dependencies {
-	'es_extended',
-	'esx_billing'
+	'es_extended'
 }
