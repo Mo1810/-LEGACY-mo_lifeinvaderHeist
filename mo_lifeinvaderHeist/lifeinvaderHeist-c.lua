@@ -34,26 +34,32 @@ end)
 
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(0)
+        Citizen.Wait(1500)
         local usbDistance = GetDistanceBetweenCoords(Config.RobberyUSBStick.Coords.x, Config.RobberyUSBStick.Coords.y, Config.RobberyUSBStick.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true)
 		if usbDistance < 1 and not currentRobbery then
-			Draw3DText(Config.RobberyUSBStick.Coords.x + 0.1, Config.RobberyUSBStick.Coords.y + 0.7, Config.RobberyUSBStick.Coords.z + 0.3, 1.5, "~r~[E] ~s~| ".._U('robbery_plugInUSB'))
+			while GetDistanceBetweenCoords(Config.RobberyUSBStick.Coords.x, Config.RobberyUSBStick.Coords.y, Config.RobberyUSBStick.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true) < 1 and not currentRobbery do
+				Draw3DText(Config.RobberyUSBStick.Coords.x + 0.1, Config.RobberyUSBStick.Coords.y + 0.7, Config.RobberyUSBStick.Coords.z + 0.3, 1.5, "~r~[E] ~s~| ".._U('robbery_plugInUSB'))
+				Citizen.Wait(4)
+			end
 		end
     end
 end)
 
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(0)
+        Citizen.Wait(1500)
         local lesterDistance = GetDistanceBetweenCoords(Config.LesterCoords.Coords.x, Config.LesterCoords.Coords.y, Config.LesterCoords.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true)
 		if lesterDistance < 2.5 and not dataUploading then
-			Draw3DText(Config.LesterCoords.Coords.x, Config.LesterCoords.Coords.y, Config.LesterCoords.Coords.z, 1.5, "~r~[E] ~s~| ".._U('lester_laptop'))
-			if IsControlJustReleased(0, Config.trigger_key) then
-				ESX.TriggerServerCallback('lifeinvaderRobbery:removeDataUSB', function(hasRemoved)
-					if hasRemoved then
-						uploadData()
-					end
-				end)
+			while lesterDistance < 2.5 and not dataUploading do
+				Draw3DText(Config.LesterCoords.Coords.x, Config.LesterCoords.Coords.y, Config.LesterCoords.Coords.z, 1.5, "~r~[E] ~s~| ".._U('lester_laptop'))
+				if IsControlJustReleased(0, Config.trigger_key) then
+					ESX.TriggerServerCallback('lifeinvaderRobbery:removeDataUSB', function(hasRemoved)
+						if hasRemoved then
+							uploadData()
+						end
+					end)
+				end
+				Citizen.Wait(4)
 			end
 		end
     end
@@ -64,30 +70,33 @@ Citizen.CreateThread(function()
 		ESX.TriggerServerCallback('lifeinvaderRobbery:getCurrentRobbery', function(cb) 
 			currentRobbery = cb
 		end)
-		Citizen.Wait(100)
+		Citizen.Wait(500)
 	end
 end)
 
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(1)
+		Citizen.Wait(1500)
 		local usbDistance = GetDistanceBetweenCoords(Config.RobberyUSBStick.Coords.x, Config.RobberyUSBStick.Coords.y, Config.RobberyUSBStick.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true)
 		if usbDistance < 1 and not currentRobbery then
-			if IsControlJustReleased(0, Config.trigger_key) then
-				ESX.TriggerServerCallback('lifeinvaderRobbery:getOnlinePoliceCount', function(enoughCops)
-					if enoughCops then
-						local usbDistance = GetDistanceBetweenCoords(Config.RobberyUSBStick.Coords.x, Config.RobberyUSBStick.Coords.y, Config.RobberyUSBStick.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true)
-						if usbDistance < 1 then
-							ESX.TriggerServerCallback('lifeinvaderRobbery:removeEmptyUSB', function(hasRemoved)
-								if not hasRemoved then
-									TriggerServerEvent('lifeinvaderRobbery:currentRobbery', false)
-								else
-									startRobbery()
-								end
-							end)
+			while GetDistanceBetweenCoords(Config.RobberyUSBStick.Coords.x, Config.RobberyUSBStick.Coords.y, Config.RobberyUSBStick.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true) < 1 and not currentRobbery do
+				if IsControlJustReleased(0, Config.trigger_key) then
+					ESX.TriggerServerCallback('lifeinvaderRobbery:getOnlinePoliceCount', function(enoughCops)
+						if enoughCops then
+							local usbDistance = GetDistanceBetweenCoords(Config.RobberyUSBStick.Coords.x, Config.RobberyUSBStick.Coords.y, Config.RobberyUSBStick.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true)
+							if usbDistance < 1 then
+								ESX.TriggerServerCallback('lifeinvaderRobbery:removeEmptyUSB', function(hasRemoved)
+									if not hasRemoved then
+										TriggerServerEvent('lifeinvaderRobbery:currentRobbery', false)
+									else
+										startRobbery()
+									end
+								end)
+							end
 						end
-					end
-				end)
+					end)
+				end
+				Citizen.Wait(50)
 			end
 		end
 	end
