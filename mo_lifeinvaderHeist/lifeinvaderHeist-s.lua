@@ -1,4 +1,7 @@
---© Mo1810--
+--[[--------------------------]]--
+--[[  Created by Mo1810#4230  ]]--
+--[[--------------------------]]--
+
 local currentRobbery = false
 ESX = nil
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
@@ -93,4 +96,7 @@ RegisterServerEvent('lifeinvaderRobbery:callPolice')
 AddEventHandler('lifeinvaderRobbery:callPolice', function()
 	TriggerClientEvent('lifeinvaderRobbery:callPolice', -1)
 end)
---© Mo1810--
+
+--[[--------------------------]]--
+--[[  Created by Mo1810#4230  ]]--
+--[[--------------------------]]--
