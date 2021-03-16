@@ -1,10 +1,8 @@
---© Mo1810--
-local USBplugged = false
-local robberyHacked = false
-local USBtaken = false
-local dataUploading = false
-local dataSended = false
-local currentRobbery = false
+--[[--------------------------]]--
+--[[  Created by Mo1810#4230  ]]--
+--[[--------------------------]]--
+
+local USBplugged, robberyHacked, USBtaken, dataUploading, dataSended, currentRobbery = false, false, false, false, false, false
 
 ESX = nil
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
@@ -297,4 +295,7 @@ function notify(msg)
 	AddTextComponentString(msg)
 	EndTextCommandThefeedPostTicker(false, true)
 end
---© Mo1810--
+
+--[[--------------------------]]--
+--[[  Created by Mo1810#4230  ]]--
+--[[--------------------------]]--
