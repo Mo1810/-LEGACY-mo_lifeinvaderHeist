@@ -295,6 +295,6 @@ end
 function notify(msg)
 	SetNotificationTextEntry("STRING")
 	AddTextComponentString(msg)
-	DrawNotification(false, false)
+	EndTextCommandThefeedPostTicker(false, true)
 end
 --© Mo1810--
