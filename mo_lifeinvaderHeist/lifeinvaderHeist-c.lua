@@ -48,7 +48,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(1500)
         local lesterDistance = GetDistanceBetweenCoords(Config.LesterCoords.Coords.x, Config.LesterCoords.Coords.y, Config.LesterCoords.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true)
 		if lesterDistance < 2.5 and not dataUploading then
-			while lesterDistance < 2.5 and not dataUploading do
+			while GetDistanceBetweenCoords(Config.LesterCoords.Coords.x, Config.LesterCoords.Coords.y, Config.LesterCoords.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true) < 2.5 and not dataUploading do
 				Draw3DText(Config.LesterCoords.Coords.x, Config.LesterCoords.Coords.y, Config.LesterCoords.Coords.z, 1.5, "~r~[E] ~s~| ".._U('lester_laptop'))
 				if IsControlJustReleased(0, Config.trigger_key) then
 					ESX.TriggerServerCallback('lifeinvaderRobbery:removeDataUSB', function(hasRemoved)
