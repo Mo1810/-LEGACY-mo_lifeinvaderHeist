@@ -48,10 +48,10 @@ Citizen.CreateThread(function()
         Citizen.Wait(1500)
         local lesterDistance = GetDistanceBetweenCoords(Config.LesterCoords.Coords.x, Config.LesterCoords.Coords.y, Config.LesterCoords.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true)
 		if lesterDistance < 2.5 and not dataUploading then
-			while GetDistanceBetweenCoords(Config.LesterCoords.Coords.x, Config.LesterCoords.Coords.y, Config.LesterCoords.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true) < 2.5 and not dataUploading do
+			while lesterDistance < 2.5 and not dataUploading do
 				Draw3DText(Config.LesterCoords.Coords.x, Config.LesterCoords.Coords.y, Config.LesterCoords.Coords.z, 1.5, "~r~[E] ~s~| ".._U('lester_laptop'))
 				if IsControlJustReleased(0, Config.trigger_key) then
-					ESX.TriggerServerCallback('lifeinvaderRobbery:removeDataUSB', function(hasRemoved)
+					ESX.TriggerServerCallback('lifeinvaderHeist:removeDataUSB', function(hasRemoved)
 						if hasRemoved then
 							uploadData()
 						end
@@ -65,7 +65,7 @@ end)
 
 Citizen.CreateThread(function()
 	while true do
-		ESX.TriggerServerCallback('lifeinvaderRobbery:getCurrentRobbery', function(cb) 
+		ESX.TriggerServerCallback('lifeinvaderHeist:getCurrentRobbery', function(cb) 
 			currentRobbery = cb
 		end)
 		Citizen.Wait(500)
@@ -79,13 +79,13 @@ Citizen.CreateThread(function()
 		if usbDistance < 1 and not currentRobbery then
 			while GetDistanceBetweenCoords(Config.RobberyUSBStick.Coords.x, Config.RobberyUSBStick.Coords.y, Config.RobberyUSBStick.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true) < 1 and not currentRobbery do
 				if IsControlJustReleased(0, Config.trigger_key) then
-					ESX.TriggerServerCallback('lifeinvaderRobbery:getOnlinePoliceCount', function(enoughCops)
+					ESX.TriggerServerCallback('lifeinvaderHeist:getOnlinePoliceCount', function(enoughCops)
 						if enoughCops then
 							local usbDistance = GetDistanceBetweenCoords(Config.RobberyUSBStick.Coords.x, Config.RobberyUSBStick.Coords.y, Config.RobberyUSBStick.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true)
 							if usbDistance < 1 then
-								ESX.TriggerServerCallback('lifeinvaderRobbery:removeEmptyUSB', function(hasRemoved)
+								ESX.TriggerServerCallback('lifeinvaderHeist:removeEmptyUSB', function(hasRemoved)
 									if not hasRemoved then
-										TriggerServerEvent('lifeinvaderRobbery:currentRobbery', false)
+										TriggerServerEvent('lifeinvaderHeist:currentRobbery', false)
 									else
 										startRobbery()
 									end
@@ -104,11 +104,11 @@ function startRobbery()
 	local playerPed = GetPlayerPed(PlayerId())
 	robberyHacked = false
 	USBtaken = false
-	TriggerServerEvent('lifeinvaderRobbery:currentRobbery', true)
+	TriggerServerEvent('lifeinvaderHeist:currentRobbery', true)
 	
-	RequestAnimDict("amb@prop_human_atm@female@enter")
+	ESX.Streaming.RequestAnimDict("amb@prop_human_atm@female@enter")
 	while not HasAnimDictLoaded("amb@prop_human_atm@female@enter") do
-		RequestAnimDict("amb@prop_human_atm@female@enter")
+		ESX.Streaming.RequestAnimDict("amb@prop_human_atm@female@enter")
 		Citizen.Wait(0)
 	end
 	TaskGoStraightToCoord(playerPed, Config.RobberyUSBStick.Coords.x, Config.RobberyUSBStick.Coords.y, Config.RobberyUSBStick.Coords.z - 1, 1.0, -1, Config.RobberyUSBStick.Heading, 0.1)
@@ -129,9 +129,9 @@ function startRobbery()
 			if IsControlJustReleased(0, Config.trigger_key) then
 				local playerCoords = vector3(GetEntityCoords(playerPed, true))
 				local obj = GetClosestObjectOfType(playerCoords.x, playerCoords.y, playerCoords.z, 3.0, GetHashKey('prop_off_chair_01'), false, true, true)
-				RequestAnimDict("amb@prop_human_seat_computer@male@base")
+				ESX.Streaming.RequestAnimDict("amb@prop_human_seat_computer@male@base")
 				while not HasAnimDictLoaded("amb@prop_human_seat_computer@male@base") do
-					RequestAnimDict("amb@prop_human_seat_computer@male@base")
+					ESX.Streaming.RequestAnimDict("amb@prop_human_seat_computer@male@base")
 					Citizen.Wait(0)
 				end
 						
@@ -149,7 +149,7 @@ function startRobbery()
 				end)
 				Citizen.Wait(500)
 				DoScreenFadeIn(1000)
-				TriggerServerEvent('lifeinvaderRobbery:callPolice')
+				TriggerServerEvent('lifeinvaderHeist:callPolice')
 				notify(_U('robbery_downloading'))
 				Citizen.Wait(10166)
 				PlaySound(-1, 'Kill_List_Counter', 'GTAO_FM_Events_Soundset', 0, 0, 1)
@@ -175,9 +175,9 @@ function startRobbery()
 		if usbDistance < 1 then
 			Draw3DText(Config.RobberyUSBStick.Coords.x + 0.1, Config.RobberyUSBStick.Coords.y + 0.7, Config.RobberyUSBStick.Coords.z + 0.3, 1.5, "~r~[E] ~s~| ".._U('robbery_takeUSB'))
 			if IsControlJustReleased(0, Config.trigger_key) then
-				RequestAnimDict("amb@prop_human_atm@male@enter")
+				ESX.Streaming.RequestAnimDict("amb@prop_human_atm@male@enter")
 				while not HasAnimDictLoaded("amb@prop_human_atm@male@enter") do
-					RequestAnimDict("amb@prop_human_atm@male@enter")
+					ESX.Streaming.RequestAnimDict("amb@prop_human_atm@male@enter")
 					Citizen.Wait(0)
 				end
 				TaskGoStraightToCoord(playerPed, Config.RobberyUSBStick.Coords.x, Config.RobberyUSBStick.Coords.y, Config.RobberyUSBStick.Coords.z - 1, 1.0, -1, Config.RobberyUSBStick.Heading, 0.1)
@@ -192,18 +192,18 @@ function startRobbery()
 				FreezeEntityPosition(playerPed, false)
 				USBtaken = true
 				notify(_U('robbery_USBtaken'))
-				ESX.TriggerServerCallback('lifeinvaderRobbery:addDataUSB', function(hasGiven)
+				ESX.TriggerServerCallback('lifeinvaderHeist:addDataUSB', function(hasGiven)
 				end)
 				if Config.shutPowerDown == true then
 					notify(_U('robbery_powerShutDown'))
-					TriggerServerEvent('lifeinvaderRobbery:shutLightsDown')
+					TriggerServerEvent('lifeinvaderHeist:shutLightsDown')
 				end
 				SetArtificialLightsState(true)
 				Citizen.SetTimeout(2 * 60000, function()
 					SetArtificialLightsState(false)
 				end)
 				Citizen.SetTimeout(Config.NextRobberyWaitTime * 60000, function()
-					TriggerServerEvent('lifeinvaderRobbery:currentRobbery', false)
+					TriggerServerEvent('lifeinvaderHeist:currentRobbery', false)
 				end)
 			end
 		end
@@ -226,7 +226,7 @@ function uploadData()
 		Draw3DText(Config.LesterCoords.Coords.x, Config.LesterCoords.Coords.y, Config.LesterCoords.Coords.z, 1.5, "~r~[E] ~s~| ".._U('lester_sell'))
 		if IsControlJustReleased(0, Config.trigger_key) then
 			notify(_U('lester_selled', Config.sellPrice))
-			ESX.TriggerServerCallback('lifeinvaderRobbery:sellData', function(hasSelled)
+			ESX.TriggerServerCallback('lifeinvaderHeist:sellData', function(hasSelled)
 				dataUploading = false
 				dataSended = true
 				return
@@ -235,8 +235,8 @@ function uploadData()
 	end
 end
 
-RegisterNetEvent('lifeinvaderRobbery:shutLightsDown')
-AddEventHandler('lifeinvaderRobbery:shutLightsDown', function()
+RegisterNetEvent('lifeinvaderHeist:shutLightsDown')
+AddEventHandler('lifeinvaderHeist:shutLightsDown', function()
 print("test1")
 	SetArtificialLightsState(true)
 	Citizen.SetTimeout(2 * 60000, function()
@@ -244,8 +244,8 @@ print("test1")
 	end)
 end)
 
-RegisterNetEvent('lifeinvaderRobbery:callPolice')
-AddEventHandler('lifeinvaderRobbery:callPolice', function()
+RegisterNetEvent('lifeinvaderHeist:callPolice')
+AddEventHandler('lifeinvaderHeist:callPolice', function()
 	local ped = GetPlayerPed(PlayerId())
 	if ESX.GetPlayerData(ped).job.name == 'police' then
 		Citizen.Wait(1000)
