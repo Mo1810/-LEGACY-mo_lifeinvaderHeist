@@ -106,11 +106,6 @@ function startRobbery()
 	USBtaken = false
 	TriggerServerEvent('lifeinvaderHeist:currentRobbery', true)
 	
-	ESX.Streaming.RequestAnimDict("amb@prop_human_atm@female@enter")
-	while not HasAnimDictLoaded("amb@prop_human_atm@female@enter") do
-		ESX.Streaming.RequestAnimDict("amb@prop_human_atm@female@enter")
-		Citizen.Wait(0)
-	end
 	TaskGoStraightToCoord(playerPed, Config.RobberyUSBStick.Coords.x, Config.RobberyUSBStick.Coords.y, Config.RobberyUSBStick.Coords.z - 1, 1.0, -1, Config.RobberyUSBStick.Heading, 0.1)
 	Citizen.Wait(1500)
 	FreezeEntityPosition(playerPed, true)
@@ -129,12 +124,7 @@ function startRobbery()
 			if IsControlJustReleased(0, Config.trigger_key) then
 				local playerCoords = vector3(GetEntityCoords(playerPed, true))
 				local obj = GetClosestObjectOfType(playerCoords.x, playerCoords.y, playerCoords.z, 3.0, GetHashKey('prop_off_chair_01'), false, true, true)
-				ESX.Streaming.RequestAnimDict("amb@prop_human_seat_computer@male@base")
-				while not HasAnimDictLoaded("amb@prop_human_seat_computer@male@base") do
-					ESX.Streaming.RequestAnimDict("amb@prop_human_seat_computer@male@base")
-					Citizen.Wait(0)
-				end
-						
+				
 				DoScreenFadeOut(1000)
 				Citizen.Wait(1000)
 				FreezeEntityPosition(playerPed, true)
@@ -175,11 +165,6 @@ function startRobbery()
 		if usbDistance < 1 then
 			Draw3DText(Config.RobberyUSBStick.Coords.x + 0.1, Config.RobberyUSBStick.Coords.y + 0.7, Config.RobberyUSBStick.Coords.z + 0.3, 1.5, "~r~[E] ~s~| ".._U('robbery_takeUSB'))
 			if IsControlJustReleased(0, Config.trigger_key) then
-				ESX.Streaming.RequestAnimDict("amb@prop_human_atm@male@enter")
-				while not HasAnimDictLoaded("amb@prop_human_atm@male@enter") do
-					ESX.Streaming.RequestAnimDict("amb@prop_human_atm@male@enter")
-					Citizen.Wait(0)
-				end
 				TaskGoStraightToCoord(playerPed, Config.RobberyUSBStick.Coords.x, Config.RobberyUSBStick.Coords.y, Config.RobberyUSBStick.Coords.z - 1, 1.0, -1, Config.RobberyUSBStick.Heading, 0.1)
 				Citizen.Wait(1500)
 				FreezeEntityPosition(playerPed, true)
