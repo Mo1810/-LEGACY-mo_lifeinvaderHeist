@@ -7,6 +7,7 @@ Locales['en'] = {
 	['lester_laptop'] = '~s~Upload ~b~data',
 	['lester_uploading'] = '~b~Data ~s~is being uploaded to the ~b~Laptop~s~.',
 	['lester_wait'] = 'Wait ~b~%s minutes~s~ until the ~b~data ~s~was uploaded to the ~b~Laptop~s~.',
+	['lester_uploaded'] = '~b~Data ~s~uploaded. ~b~Data ~s~ready to ~b~send~s~.',
 	['lester_sell'] = '~s~Send ~b~data ~s~to ~b~Lester',
 	['lester_selled'] = '~b~Data ~s~was sent to ~b~Lester~s~. You earned ~b~%s black money~s~.',
 	--Robbery
