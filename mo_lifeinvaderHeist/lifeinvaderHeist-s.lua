@@ -6,7 +6,7 @@ local currentRobbery = false
 ESX = nil
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
-ESX.RegisterServerCallback("lifeinvaderRobbery:getOnlinePoliceCount",function(source,cb)
+ESX.RegisterServerCallback("lifeinvaderHeist:getOnlinePoliceCount",function(source,cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local Players = ESX.GetPlayers()
 	local policeOnline = 0
@@ -24,7 +24,7 @@ ESX.RegisterServerCallback("lifeinvaderRobbery:getOnlinePoliceCount",function(so
 	end
 end)
 
-ESX.RegisterServerCallback('lifeinvaderRobbery:removeEmptyUSB', function(source, cb)
+ESX.RegisterServerCallback('lifeinvaderHeist:removeEmptyUSB', function(source, cb)
 	_source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	while xPlayer == nil do
@@ -40,7 +40,7 @@ ESX.RegisterServerCallback('lifeinvaderRobbery:removeEmptyUSB', function(source,
 	end
 end)
 
-ESX.RegisterServerCallback('lifeinvaderRobbery:addDataUSB', function(source, cb)
+ESX.RegisterServerCallback('lifeinvaderHeist:addDataUSB', function(source, cb)
 	_source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	while xPlayer == nil do
@@ -51,7 +51,7 @@ ESX.RegisterServerCallback('lifeinvaderRobbery:addDataUSB', function(source, cb)
 	cb(true)
 end)
 
-ESX.RegisterServerCallback('lifeinvaderRobbery:removeDataUSB', function(source, cb)
+ESX.RegisterServerCallback('lifeinvaderHeist:removeDataUSB', function(source, cb)
 	_source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	while xPlayer == nil do
@@ -67,7 +67,7 @@ ESX.RegisterServerCallback('lifeinvaderRobbery:removeDataUSB', function(source, 
 	end
 end)
 
-ESX.RegisterServerCallback('lifeinvaderRobbery:sellData', function(source, cb)
+ESX.RegisterServerCallback('lifeinvaderHeist:sellData', function(source, cb)
 	_source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	while xPlayer == nil do
@@ -78,23 +78,23 @@ ESX.RegisterServerCallback('lifeinvaderRobbery:sellData', function(source, cb)
 	cb(true)
 end)
 
-ESX.RegisterServerCallback('lifeinvaderRobbery:getCurrentRobbery', function(source, cb)
+ESX.RegisterServerCallback('lifeinvaderHeist:getCurrentRobbery', function(source, cb)
 	cb(currentRobbery)
 end)
 
-RegisterServerEvent('lifeinvaderRobbery:currentRobbery')
-AddEventHandler('lifeinvaderRobbery:currentRobbery', function(bool)
+RegisterServerEvent('lifeinvaderHeist:currentRobbery')
+AddEventHandler('lifeinvaderHeist:currentRobbery', function(bool)
 	currentRobbery = bool
 end)
 
-RegisterServerEvent('lifeinvaderRobbery:shutLightsDown')
-AddEventHandler('lifeinvaderRobbery:shutLightsDown', function()
-	TriggerClientEvent('lifeinvaderRobbery:shutLightsDown', -1)
+RegisterServerEvent('lifeinvaderHeist:shutLightsDown')
+AddEventHandler('lifeinvaderHeist:shutLightsDown', function()
+	TriggerClientEvent('lifeinvaderHeist:shutLightsDown', -1)
 end)
 
-RegisterServerEvent('lifeinvaderRobbery:callPolice')
-AddEventHandler('lifeinvaderRobbery:callPolice', function()
-	TriggerClientEvent('lifeinvaderRobbery:callPolice', -1)
+RegisterServerEvent('lifeinvaderHeist:callPolice')
+AddEventHandler('lifeinvaderHeist:callPolice', function()
+	TriggerClientEvent('lifeinvaderHeist:callPolice', -1)
 end)
 
 --[[--------------------------]]--
