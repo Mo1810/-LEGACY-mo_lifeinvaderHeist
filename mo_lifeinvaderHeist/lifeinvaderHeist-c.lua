@@ -222,7 +222,6 @@ end
 
 RegisterNetEvent('lifeinvaderHeist:shutLightsDown')
 AddEventHandler('lifeinvaderHeist:shutLightsDown', function()
-print("test1")
 	SetArtificialLightsState(true)
 	Citizen.SetTimeout(2 * 60000, function()
 		SetArtificialLightsState(false)
