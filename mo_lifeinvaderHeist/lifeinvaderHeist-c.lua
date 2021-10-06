@@ -84,6 +84,7 @@ end)
 
 function startRobbery()
 	local playerPed = GetPlayerPed(PlayerId())
+        currentRobbery = true
 	robberyHacked = false
 	USBtaken = false
 	TriggerServerEvent('lifeinvaderHeist:currentRobbery', true)
