@@ -189,8 +189,8 @@ function uploadData()
 	notify(_U('lester_uploaded'))
 	PlaySound(-1, 'OOB_Start', 'GTAO_FM_Events_Soundset', 0, 0, 1)
 	dataSended = false
-	while not dataSended do
-		Citizen.Wait(0)
+	while not dataSended and GetDistanceBetweenCoords(Config.LesterCoords.Coords.x, Config.LesterCoords.Coords.y, Config.LesterCoords.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true) < 5.0 do		
+		Citizen.Wait(4)
 		Draw3DText(Config.LesterCoords.Coords.x, Config.LesterCoords.Coords.y, Config.LesterCoords.Coords.z, 1.5, "~r~[E] ~s~| ".._U('lester_sell'))
 		if IsControlJustReleased(0, Config.trigger_key) then
 			notify(_U('lester_selled', Config.sellPrice))
