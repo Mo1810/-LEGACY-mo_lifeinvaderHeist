@@ -31,8 +31,8 @@ ESX.RegisterServerCallback('lifeinvaderHeist:removeEmptyUSB', function(source, c
 		xPlayer = ESX.GetPlayerFromId(_source)
 		Citizen.Wait(0)
 	end
-	if xPlayer.getInventoryItem('usbstick').count > 0 then
-		xPlayer.removeInventoryItem('usbstick', 1)
+	if xPlayer.getInventoryItem(Config.usbstickItem).count > 0 then
+		xPlayer.removeInventoryItem(Config.usbstickItem, 1)
 		cb(true)
 	else
 		xPlayer.showNotification(_U('not_enough_empty'))
@@ -47,7 +47,7 @@ ESX.RegisterServerCallback('lifeinvaderHeist:addDataUSB', function(source, cb)
 		xPlayer = ESX.GetPlayerFromId(_source)
 		Citizen.Wait(0)
 	end
-	xPlayer.addInventoryItem('usbstick_data', 1)
+	xPlayer.addInventoryItem(Config.usbstickDataItem, 1)
 	cb(true)
 end)
 
@@ -58,8 +58,8 @@ ESX.RegisterServerCallback('lifeinvaderHeist:removeDataUSB', function(source, cb
 		xPlayer = ESX.GetPlayerFromId(_source)
 		Citizen.Wait(0)
 	end
-	if xPlayer.getInventoryItem('usbstick_data').count > 0 then
-		xPlayer.removeInventoryItem('usbstick_data', 1)
+	if xPlayer.getInventoryItem(Config.usbstickDataItem).count > 0 then
+		xPlayer.removeInventoryItem(Config.usbstickDataItem, 1)
 		cb(true)
 	else
 		xPlayer.showNotification(_U('not_enough_data'))
