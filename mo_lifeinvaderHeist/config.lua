@@ -8,7 +8,7 @@ Config.NextRobberyWaitTime = 30--------------------(min)default: 30
 Config.UploadWaitTime = 1.5------------------------(min)default: 1.5
 Config.shutPowerDown = true------------------------		default: true
 Config.trigger_key = 46----------------------------(E)
-Config.RequiredPolice = 0--------------------------		default: 3
+Config.RequiredPolice = 3--------------------------		default: 3
 Config.usbstickItem = 'usbstick'-------------------		default: "usbstick"
 Config.usbstickDataItem = 'usbstick_data'----------		default: "usbstick_data"
 
