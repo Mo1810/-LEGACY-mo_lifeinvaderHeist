@@ -2,7 +2,7 @@
 --[[  Created by Mo1810#4230  ]]--
 --[[--------------------------]]--
 
-local USBplugged, robberyHacked, USBtaken, dataUploading, dataSended, currentRobbery = false, false, false, false, false, false
+local USBplugged, robberyHacked, USBtaken, dataUploading, dataSent, currentRobbery = false, false, false, false, false, false
 
 ESX = nil
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
@@ -188,15 +188,15 @@ function uploadData()
 	Citizen.Wait(Config.UploadWaitTime * 60000)
 	notify(_U('lester_uploaded'))
 	PlaySound(-1, 'OOB_Start', 'GTAO_FM_Events_Soundset', 0, 0, 1)
-	dataSended = false
-	while not dataSended and GetDistanceBetweenCoords(Config.LesterCoords.Coords.x, Config.LesterCoords.Coords.y, Config.LesterCoords.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true) < 5.0 do		
+	dataSent = false
+	while not dataSent and GetDistanceBetweenCoords(Config.LesterCoords.Coords.x, Config.LesterCoords.Coords.y, Config.LesterCoords.Coords.z, GetEntityCoords(GetPlayerPed(PlayerId())), true) < 5.0 do		
 		Citizen.Wait(4)
 		Draw3DText(Config.LesterCoords.Coords.x, Config.LesterCoords.Coords.y, Config.LesterCoords.Coords.z, 1.5, "~r~[E] ~s~| ".._U('lester_sell'))
 		if IsControlJustReleased(0, Config.trigger_key) then
 			notify(_U('lester_selled', Config.sellPrice))
 			ESX.TriggerServerCallback('lifeinvaderHeist:sellData', function(hasSelled)
 				dataUploading = false
-				dataSended = true
+				dataSent = true
 				return
 			end)
 		end
