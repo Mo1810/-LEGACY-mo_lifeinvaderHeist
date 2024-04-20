@@ -2,7 +2,7 @@ fx_version 'bodacious'
 game 'gta5' 
 
 author 'Mo1810#4230'
-version '1.1.2'
+version '1.2.0'
 
 server_scripts {
 	"@mysql-async/lib/MySQL.lua",
