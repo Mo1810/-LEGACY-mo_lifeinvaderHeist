@@ -4,9 +4,6 @@
 
 local USBplugged, robberyHacked, USBtaken, dataUploading, dataSent, currentRobbery = false, false, false, false, false, false
 
-ESX = nil
-TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-
 for _, player in ipairs(GetActivePlayers()) do
 	SetArtificialLightsState(false)
 end
