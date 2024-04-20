@@ -3,8 +3,6 @@
 --[[--------------------------]]--
 
 local currentRobbery = false
-ESX = nil
-TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 ESX.RegisterServerCallback("lifeinvaderHeist:getOnlinePoliceCount",function(source,cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
