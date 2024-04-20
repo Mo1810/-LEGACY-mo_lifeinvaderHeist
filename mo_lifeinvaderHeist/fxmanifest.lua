@@ -21,6 +21,10 @@ client_scripts {
 	"locales/en.lua"
 }
 
+shared_scripts {
+	"@es_extended/imports.lua"
+}
+
 dependencies {
 	'es_extended'
 }
