@@ -2,8 +2,7 @@
 
 Lifeinvader Heist Script for FiveM [lua;esx]
 
-For support please write an issue and I will proceed it as soon as possible.
-Or feel free to join my discord and ask for help. Link in my profile.
+For support please write an issue and I will proceed it as soon as possible. Or feel free to join my discord and ask for help. Link in my profile.
 
 ### EN/GER translation
 
