@@ -1,8 +1,8 @@
-fx_version 'bodacious'
+fx_version 'cerulean'
 game 'gta5' 
 
-author 'Mo1810#4230'
-version '1.2.0'
+author 'Mo1810'
+version '1.2.1'
 
 server_scripts {
 	"@mysql-async/lib/MySQL.lua",
