@@ -14,10 +14,10 @@ client_scripts {
 }
 
 shared_scripts {
- "@es_extended/locale.lua",
+	"@es_extended/locale.lua",
 	"@es_extended/imports.lua",
- "config.lua",
- "locales/*.lua"
+ 	"config.lua",
+ 	"locales/*.lua"
 }
 
 dependencies {
